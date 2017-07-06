@@ -1,0 +1,92 @@
+from checklist_api.models import *
+
+example = CheckList(name='cici')
+example.save()
+
+step1 = CheckListStep(checklist=example, content='step1')
+step1.save()
+step2 = CheckListStep(checklist=example, content='step2')
+step2.save()
+step3 = CheckListStep(checklist=example, content='step3')
+step3.save()
+
+example.first_step = step1
+example.save()
+
+step1.next_step = step2
+step1.save()
+step2.next_step = step3
+step2.save()
+
+step1_children_step1 = CheckListStep(content='step1_step1', parent_step=example.first_step)
+step1_children_step1.save()
+step1_children_step2 = CheckListStep(content='step1_step2', parent_step=example.first_step)
+step1_children_step2.save()
+step1_children_step3 = CheckListStep(content='step1_step3', parent_step=example.first_step)
+step1_children_step3.save()
+step1_children_step4 = CheckListStep(content='step1_step4', parent_step=example.first_step)
+step1_children_step4.save()
+
+step1_children_step1.next_step = step1_children_step2
+step1_children_step1.save()
+step1_children_step2.next_step = step1_children_step3
+step1_children_step2.save()
+step1_children_step3.next_step = step1_children_step4
+step1_children_step3.save()
+step1.first_children = step1_children_step1
+step1.save()
+
+example = CheckList(name='check')
+example.save()
+
+check1 = CheckListStep(checklist=example, content='check1')
+check1.save()
+check2 = CheckListStep(checklist=example, content='check2')
+check2.save()
+check3 = CheckListStep(checklist=example, content='check3')
+check3.save()
+
+example.first_step = check1
+example.save()
+
+check1.next_step = check2
+check1.save()
+check2.next_step = check3
+check2.save()
+
+check1_children_check1 = CheckListStep(content='check1_check1', parent_step=example.first_step)
+check1_children_check1.save()
+check1_children_check2 = CheckListStep(content='check1_check2', parent_step=example.first_step)
+check1_children_check2.save()
+check1_children_check3 = CheckListStep(content='check1_check3', parent_step=example.first_step)
+check1_children_check3.save()
+check1_children_check4 = CheckListStep(content='check1_check4', parent_step=example.first_step)
+check1_children_check4.save()
+
+check1_children_check1.next_step = check1_children_check2
+check1_children_check1.save()
+check1_children_check2.next_step = check1_children_check3
+check1_children_check2.save()
+check1_children_check3.next_step = check1_children_check4
+check1_children_check3.save()
+check1.first_children = check1_children_check1
+check1.save()
+
+
+
+from checklist_api.models import *
+cici = CheckList.objects.get(name='cici')
+step1_step2 = CheckListStep.objects.get(content='step1_step2')
+step1_step1 = CheckListStep.objects.get(content='step1_step1')
+step1_step3 = CheckListStep.objects.get(content='step1_step3')
+
+now_step = cici.first_step
+for i in range(cici.checkliststep_set.count()):
+    print now_step.content
+    if now_step.children_step.exists():
+        children_step = now_step.first_children
+        for x in range(now_step.children_step.count()):
+            print children_step.content
+            children_step = getattr(children_step, 'next_step')
+    now_step = getattr(now_step, 'next_step')
+
