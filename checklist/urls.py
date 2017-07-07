@@ -15,7 +15,10 @@ Including another URLconf
 """
 from django.conf.urls import url
 # from django.contrib import admin
+from checklist_api import views
 
 urlpatterns = [
     # url(r'^admin/', admin.site.urls),
+    url(r'checklist/$', views.checklists_show),
+    url(r'checklist/(?P<pk>\d+)/$', views.checklist_detail),
 ]

@@ -14,7 +14,7 @@ class CheckList(models.Model):
 
 
 class CheckListStep(models.Model):
-    checklist = models.ForeignKey(CheckList, null=True)
+    checklist = models.ForeignKey(CheckList, null=True, related_name='step_list')
     content = models.CharField(max_length=100)
     next_step = models.OneToOneField('CheckListStep', null=True, related_name='last_step', on_delete=models.DO_NOTHING)
     parent_step = models.ForeignKey('CheckListStep', related_name='children_step', null=True)
