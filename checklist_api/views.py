@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render_to_response
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.renderers import JSONRenderer
@@ -9,7 +9,7 @@ from checklist_api.serializers import CheckListShowSerializer
 
 
 @csrf_exempt
-def checklists_show(request):
+def checklistsapi_show(request):
     if request.method == 'GET':
         checklists = CheckList.objects.all()
         serializer = CheckListShowSerializer(checklists, many=True)
@@ -17,7 +17,7 @@ def checklists_show(request):
 
 
 @csrf_exempt
-def checklist_detail(request, pk):
+def checklistapi_detail(request, pk):
     try:
         checklist = CheckList.objects.get(pk=pk)
     except CheckList.DoesNotExist:
@@ -26,3 +26,8 @@ def checklist_detail(request, pk):
     if request.method == 'GET':
         serializer = CheckListSerializer(checklist)
         return JsonResponse(serializer.data, safe=False)
+
+
+def checklist_index(request):
+    if request.method == 'GET':
+        return render_to_response('checklist/dist/index.html')

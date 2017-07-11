@@ -19,6 +19,7 @@ from checklist_api import views
 
 urlpatterns = [
     # url(r'^admin/', admin.site.urls),
-    url(r'checklist/$', views.checklists_show),
-    url(r'checklist/(?P<pk>\d+)/$', views.checklist_detail),
+    url(r'checklistapi/$', views.checklistsapi_show),
+    url(r'checklistapi/(?P<pk>\d+)/$', views.checklistapi_detail),
+    url(r'checklist/$', views.checklist_index),
 ]
