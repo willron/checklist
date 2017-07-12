@@ -2,8 +2,8 @@
 # -*- coding:utf-8 -*-
 
 from rest_framework import serializers
-from checklist_api.models import CheckList
-from checklist_api.models import CheckListStep
+from backend.models import CheckList
+from backend.models import CheckListStep
 
 
 class ChildrenStepSerializer(serializers.ModelSerializer):

@@ -3,9 +3,9 @@ from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
-from checklist_api.models import CheckList
-from checklist_api.serializers import CheckListSerializer
-from checklist_api.serializers import CheckListShowSerializer
+from backend.models import CheckList
+from backend.serializers import CheckListSerializer
+from backend.serializers import CheckListShowSerializer
 
 
 @csrf_exempt
@@ -30,4 +30,4 @@ def checklistapi_detail(request, pk):
 
 def checklist_index(request):
     if request.method == 'GET':
-        return render_to_response('checklist/dist/index.html')
+        return render_to_response('cici.html')
