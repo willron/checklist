@@ -1,2 +1,2 @@
 # checklist
-just practise Django + Vue.js
+just practise Django + Django REST framework + Vue.js
