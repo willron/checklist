@@ -8,33 +8,49 @@
 {#		<link rel="stylesheet" href="node_modules/todomvc-common/base.css">#}
 		<link rel="stylesheet" href="{% static 'css/index.css' %}">
 		<!-- CSS overrides - remove if you don't need it -->
-		<link rel="stylesheet" href="css/app.css">
+{#		<link rel="stylesheet" href="css/app.css">#}
+        <style>
+            .todo-list li span {
+	text-align: center;
+	width: 40px;
+	/* auto, since non-WebKit browsers doesn't support input styling */
+	height: auto;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	margin: auto 0;
+	border: none; /* Mobile Safari */
+	-webkit-appearance: none;
+	appearance: none;
+}
+        </style>
 	</head>
 	<body>
 		<section class="todoapp">
 			<header class="header">
-				<h1>todos</h1>
+				<h1 id="app">[[ todos ]]</h1>
 				<input class="new-todo" placeholder="What needs to be done?" autofocus>
 			</header>
 			<!-- This section should be hidden by default and shown when there are todos -->
 			<section class="main">
 				<input id="toggle-all" class="toggle-all" type="checkbox">
 				<label for="toggle-all">Mark all as complete</label>
-				<ul class="todo-list">
+				<ul class="todo-list" id="checklists">
 					<!-- These are here just to show the structure of the list items -->
 					<!-- List items should get the class `editing` when editing and `completed` when marked as completed -->
-					<li class="completed">
+{#					<li class="completed">#}
+{#						<div class="view">#}
+{#							<input class="toggle" type="checkbox" checked>#}
+{#							<label>Taste JavaScript</label>#}
+{#							<button class="destroy"></button>#}
+{#						</div>#}
+{#						<input class="edit" value="Create a TodoMVC template">#}
+{#					</li>#}
+					<li v-for="(list, index) in lists">
 						<div class="view">
-							<input class="toggle" type="checkbox" checked>
-							<label>Taste JavaScript</label>
-							<button class="destroy"></button>
-						</div>
-						<input class="edit" value="Create a TodoMVC template">
-					</li>
-					<li>
-						<div class="view">
-							<input class="toggle" type="checkbox">
-							<label>Buy a unicorn</label>
+{#							<input class="toggle" type="checkbox">#}
+{#                            <span class="">[[ index+1 ]]</span>#}
+							<label>[[ index+1 ]]: [[ list.name ]]</label>
 							<button class="destroy"></button>
 						</div>
 						<input class="edit" value="Rule the web">
@@ -71,28 +87,7 @@
 		</footer>
 		<!-- Scripts here. Don't remove ↓ -->
         <script src="{% static 'js/vue.js' %}"></script>
+        <script src="{% static 'js/axios.min.js' %}"></script>
+        <script src="{% static 'js/myvue.js' %}"></script>
 	</body>
 </html>
-{#<!DOCTYPE html>#}
-{#<html lang="en">#}
-{#<head>#}
-{#    <meta charset="UTF-8">#}
-{#    <title>Title</title>#}
-{#</head>#}
-{#<body>#}
-{#<div id="app">#}
-{#  [[ message ]]#}
-{##}
-{#</div>#}
-{##}
-{#<script>#}
-{#var app = new Vue({#}
-{#  el: '#app',#}
-{#  data: {#}
-{#    message: 'Hello Vue!'#}
-{#  },#}
-{#    delimiters : ['[[', ']]']#}
-{#})#}
-{#</script>#}
-{#</body>#}
-{#</html>#}
