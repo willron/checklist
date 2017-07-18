@@ -28,6 +28,4 @@ def checklistapi_detail(request, pk):
         return JsonResponse(serializer.data, safe=False)
 
 
-def checklist_index(request):
-    if request.method == 'GET':
-        return render_to_response('cici.html')
+

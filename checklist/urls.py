@@ -15,11 +15,12 @@ Including another URLconf
 """
 from django.conf.urls import url
 # from django.contrib import admin
-from backend import views
+from backend import views as backend_views
+from frontend import views as frontend_views
 
 urlpatterns = [
     # url(r'^admin/', admin.site.urls),
-    url(r'checklistapi/$', views.checklistsapi_show),
-    url(r'checklistapi/(?P<pk>\d+)/$', views.checklistapi_detail),
-    url(r'checklist/$', views.checklist_index),
+    url(r'checklistapi/$', backend_views.checklistsapi_show),
+    url(r'checklistapi/(?P<pk>\d+)/$', backend_views.checklistapi_detail),
+    url(r'checklist/$', frontend_views.checklist_index),
 ]
